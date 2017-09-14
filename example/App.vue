@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <hello></hello>
+    <img class="example-pic" v-image-preview="pic" v-for="pic in pictures" :src="pic" alt=""/>
   </div>
 </template>
 
@@ -10,6 +10,17 @@ import VueDirectiveImagePreviewer from '../dist'
 
 export default {
   name: 'app',
+  data () {
+    return {
+      pictures: [
+        '../static/cat.jpg',
+        '../static/fox.jpg',
+        '../static/lion.jpg',
+        '../static/squirrel.jpg',
+        '../static/WTF.png'
+      ]
+    }
+  },
   components: {
     Hello
   },
@@ -19,13 +30,9 @@ export default {
 }
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style >
+.example-pic {
+  width: 28%;
+  margin-right: 2%;
 }
 </style>
