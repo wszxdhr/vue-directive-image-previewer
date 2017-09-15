@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <img class="example-pic" v-image-preview="pic" v-for="pic in pictures" :src="pic" alt=""/>
-    <img class="example-pic fixed" v-image-preview="fixedPicture" :src="fixedPicture" alt=""/>
+    <img class="example-pic fixed" v-image-preview :src="fixedPicture" alt=""/>
     <!--<image-previewer></image-previewer>-->
   </div>
 </template>

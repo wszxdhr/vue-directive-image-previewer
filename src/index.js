@@ -28,7 +28,7 @@ export default {
 
 function onElClicked (evt, el, val) {
   // init val
-  let pictureUrl = typeof val === 'string' ? val : val.pictureUrl
+  let pictureUrl = val ? (typeof val === 'string' ? val : val.pictureUrl) : (el.src ? el.src : '')
   // init a vue component
   let rect = getRect(el)
   let instance = getInstance()
