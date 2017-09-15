@@ -1,24 +1,50 @@
-# vue-directive-image-previewer-dev
+# vue-directive-image-previewer
 
-> A Vue.js project for develop and test vue-directive-image-previewer 
+> A Vue.js project for tag img, click img to zoom out to full screen.
 
 ## Build Setup
 
 ``` bash
-# install dependencies
-npm install
+# install vue-directive-image-previewer
+npm install vue-directive-image-previewer -D
 
-# serve with hot reload at localhost:8080
-npm run dev
+# main.js
+import VueDirectiveImagePreviewer from 'vue-directive-image-previewer'
+Vue.use(VueDirectiveImagePreviewer)	
+or
+Vue.use(VueDirectiveImagePreviewer, {
+  background: {     // or : background: '#000'
+    color: '#000' // or rgba or rgb     // or image: 'url(xxx)'
+  },
+  // transition
+  animate: {
+    duration: 600,
+    delay: 500
+  },
+  // loading
+  loading: {
+    image: ''
+  },
+  // cursor(css)
+  cursor: 'pointer',
+  clickMethod: 'doubleClick'   // click or doubleClick
+})
 
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
+# use this directive
+<img v-image-preview src="some-pic-url"/>
+or 
+<img v-image-preview="some-pic-url" src="some-pic-url"/>
+or
+<img v-image-preview="{pictureUrl: 'some-pic-url'}" src="some-pic-url"/>
 ```
 
+## Github
+[github](https://github.com/wszxdhr/vue-directive-image-previewer.git)   Why not Star? Why? Come on!
+
+> Welcome to give me some advise or help me to make the code stronger, thanks!
+
 ## Demo
+
 http://demo.anymelon.com/vue-directive-image-previewer
 
 ## Api    (updated at 2017-09-15)

@@ -4,7 +4,9 @@
   "main": "dist/index.js",
   "files": [
     "dist",
-    "src"
+    "src",
+    "README.md",
+    "LICENSE"
   ],
   "description": "A Vue.js directive plugin for <img>, click image to show preview.",
   "author": "张潇 <wszxdhr@126.com>",
