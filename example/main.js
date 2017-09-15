@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import VueDirectiveImagePreviewer from '../src/index.js'
+import '../dist/assets/style.css'
 
 Vue.config.productionTip = false
 

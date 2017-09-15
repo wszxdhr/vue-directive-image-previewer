@@ -8,7 +8,12 @@
 import windowInfo from './modules/windowInfo'
 import getInstance from './modules/instance.js'
 
-const duration = 500
+// global variables
+let background = {color: '#000000'}
+let animate = {duration: 500}
+// let loading = undefined
+// let cursor = 'pointer'
+// let clickMethod = 'click'
 
 export default {
   install (Vue, options) {
@@ -34,6 +39,7 @@ function onElClicked (evt, el, val) {
   let instance = getInstance()
   // init data of instance
   instance.picture = pictureUrl
+  instance.wrapperStyle = makeWrapperStyle({background, opacity: 0})
   instance.pictureTop = (rect.bottom + rect.top) / 2 + 'px'
   instance.pictureWidth = rect.width + 'px'
   instance.pictureHeight = rect.height + 'px'
@@ -43,6 +49,7 @@ function onElClicked (evt, el, val) {
   let ratio = rect.height / rect.width
   // set final position of picture
   setTimeout(() => {
+    instance.wrapperStyle = makeWrapperStyle({background, opacity: 1})
     instance.pictureTop = '50%'
     instance.pictureLeft = '50%'
     instance.pictureWidth = windowInfo.width * 0.9 + 'px'
@@ -58,6 +65,7 @@ function onElClicked (evt, el, val) {
 function close (evt, instance, el) {
   // TODO: 待优化
   let rect = getRect(el)
+  instance.wrapperStyle = makeWrapperStyle({background, opacity: 0})
   instance.pictureTop = (rect.bottom + rect.top) / 2 + 'px'
   instance.pictureWidth = rect.width + 'px'
   instance.pictureHeight = rect.height + 'px'
@@ -65,7 +73,7 @@ function close (evt, instance, el) {
   setTimeout(() => {
     // TODO: 处理多个vue-directive-image-previewer
     removeInstance(document.getElementsByClassName('vue-directive-image-previewer')[0])
-  }, duration)
+  }, animate.duration)
 }
 
 // remove instance
@@ -80,4 +88,18 @@ function getRect (el) {
   // TODO: 兼容
   let rect = el.getBoundingClientRect()
   return rect
+}
+
+function makeWrapperStyle (style) {
+  let result = {}
+  for (let s in style) {
+    if (s === 'background') {
+      for (let bgKey in style[s]) {
+        result[`${s}-${bgKey}`] = style[s][bgKey]
+      }
+      continue
+    }
+    result[s] = style[s]
+  }
+  return result
 }

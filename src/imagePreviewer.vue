@@ -1,17 +1,19 @@
 <template>
   <div ref="vue-directive-image-previewer"
-       class="vue-directive-image-previewer"
-       :style="wrapperStyle">
-    <div class="wrapper" @click="$emit('click')">
-      <img :src="picture"
-           class="vue-directive-image-previewer-pic"
-           :style="{
+       class="vue-directive-image-previewer">
+    <div class="wrapper"
+         @click="$emit('click')"
+         :style="wrapperStyle">
+    </div>
+    <img :src="picture"
+         class="vue-directive-image-previewer-pic"
+         @click="$emit('click')"
+         :style="{
              height: pictureHeight,
              width: pictureWidth,
              top: pictureTop,
              left: pictureLeft
            }"/>
-    </div>
   </div>
 </template>
 <script type="text/babel">
@@ -40,6 +42,8 @@
       left: 0;
       right: 0;
       bottom: 0;
+      opacity: 0;
+      transition: opacity .5s;
     }
     .vue-directive-image-previewer-pic {
       position: fixed;
