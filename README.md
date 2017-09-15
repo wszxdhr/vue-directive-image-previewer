@@ -52,13 +52,13 @@ http://demo.anymelon.com/vue-directive-image-previewer
 
 ### options(in Vue.use())
 
-| API         | TYPE          | EXAMPLE                                  | DEFAULT           | DESCRIBE                                 |
-| ----------- | ------------- | ---------------------------------------- | ----------------- | ---------------------------------------- |
-| background  | String / JSON | "#000000" or {color: "#000000"} or {image: "url(/someurl)"} | {color:"#000000"} | Background css of wrapper                |
-| animate     | JSON          | {duration: 500, delay: 300, func: "linear"} | {duration: 500}   | Transition css of image(typeof field "duration" must be Number) |
-| loading     | JSON          | {pictureUrl: "http://somePicUrl"}        | undefined         | Settings of image when it is loading     |
-| cursor      | String        | (whatever of css cursor)                 | "pointer"         | Cursor css of image which has directive "v-image-preview" |
-| clickMethod | String        | "click" / "doubleClick"                  | "click"           | Method of opening image, **not for closing** |
+| API                          | TYPE          | EXAMPLE                                  | DEFAULT           | DESCRIBE                                 |
+| ---------------------------- | ------------- | ---------------------------------------- | ----------------- | ---------------------------------------- |
+| background                   | String / JSON | "#000000" or {color: "#000000"} or {image: "url(/someurl)"} | {color:"#000000"} | Background css of wrapper                |
+| animate（not support yet）     | JSON          | {duration: 500, delay: 300, func: "linear"} | {duration: 500}   | Transition css of image(typeof field "duration" must be Number) |
+| loading（not support yet）     | JSON          | {pictureUrl: "http://somePicUrl"}        | undefined         | Settings of image when it is loading     |
+| cursor（not support yet）      | String        | (whatever of css cursor)                 | "pointer"         | Cursor css of image which has directive "v-image-preview" |
+| clickMethod（not support yet） | String        | "click" / "doubleClick"                  | "click"           | Method of opening image, **not for closing** |
 
 ### options(in directive)
 
