@@ -9,6 +9,7 @@ import windowInfo from './modules/windowInfo'
 import getInstance from './modules/instance.js'
 
 // global variables
+let isCopy = false
 let background = {color: '#000000'}
 let animate = {duration: 500}
 // let loading = undefined
@@ -17,9 +18,11 @@ let animate = {duration: 500}
 
 export default {
   install (Vue, options) {
-    console.log(options)
+    options = options || {}
     // init
-    // let background = typeof options.background === 'string' ? {color: options.background} : (options.background || {color: '#000'})
+    isCopy = options.type === 'copy'
+    console.log('isCopy : ', isCopy)
+    background = typeof options.background === 'string' ? {color: options.background} : (options.background || {color: '#000'})
     Vue.directive('image-preview', {
       bind (el, binding, vnode, oldVnode) {
         console.dir(binding.value, vnode, oldVnode)
@@ -32,6 +35,10 @@ export default {
 }
 
 function onElClicked (evt, el, val) {
+  // judges
+  // if (!isCopy) {
+  //
+  // }
   // init val
   let pictureUrl = val ? (typeof val === 'string' ? val : val.pictureUrl) : (el.src ? el.src : '')
   // init a vue component
@@ -40,6 +47,7 @@ function onElClicked (evt, el, val) {
   // init data of instance
   instance.picture = pictureUrl
   instance.wrapperStyle = makeWrapperStyle({background, opacity: 0})
+  // picture before zoom
   instance.pictureTop = (rect.bottom + rect.top) / 2 + 'px'
   instance.pictureWidth = rect.width + 'px'
   instance.pictureHeight = rect.height + 'px'
@@ -50,10 +58,17 @@ function onElClicked (evt, el, val) {
   // set final position of picture
   setTimeout(() => {
     instance.wrapperStyle = makeWrapperStyle({background, opacity: 1})
+    // picture after zoom
     instance.pictureTop = '50%'
     instance.pictureLeft = '50%'
-    instance.pictureWidth = windowInfo.width * 0.9 + 'px'
-    instance.pictureHeight = windowInfo.width * 0.9 * ratio + 'px'
+    let picHeight = windowInfo.width * 0.9 * ratio
+    if (windowInfo.height * 0.9 < picHeight) {
+      instance.pictureHeight = windowInfo.height * 0.9 + 'px'
+      instance.pictureWidth = windowInfo.height * 0.9 / ratio + 'px'
+    } else {
+      instance.pictureHeight = picHeight + 'px'
+      instance.pictureWidth = windowInfo.width * 0.9 + 'px'
+    }
   }, 0)
   // set onClick
   instance.$on('click', (evt) => {

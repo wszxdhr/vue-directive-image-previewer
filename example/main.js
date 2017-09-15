@@ -8,8 +8,9 @@ import '../dist/assets/style.css'
 Vue.config.productionTip = false
 
 Vue.use(VueDirectiveImagePreviewer, {
+  type: 'move',   // copy or move
   background: {     // or : background: '#000'
-    color: '#000' // or rgba or rgb     // or image: 'url(xxx)'
+    color: 'rgba(0, 0, 0, 0.9)' // or rgba or rgb     // or image: 'url(xxx)'
   },
   // transition
   animate: {
