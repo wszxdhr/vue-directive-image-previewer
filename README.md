@@ -10,6 +10,7 @@ npm install vue-directive-image-previewer -D
 
 # main.js
 import VueDirectiveImagePreviewer from 'vue-directive-image-previewer'
+import 'vue-directive-image-previewer/dist/assets/style.css'
 Vue.use(VueDirectiveImagePreviewer)	
 or
 Vue.use(VueDirectiveImagePreviewer, {
