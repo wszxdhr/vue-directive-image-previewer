@@ -10,14 +10,18 @@ Vue.use(VueDirectiveImagePreviewer, {
   background: {     // or : background: '#000'
     color: '#000' // or rgba or rgb     // or image: 'url(xxx)'
   },
+  // transition
   animate: {
     duration: 600,
     delay: 500
   },
+  // loading
   loading: {
     image: ''
   },
-
+  // cursor(css)
+  cursor: 'pointer',
+  clickMethod: 'doubleClick'   // click or doubleClick
 })
 
 /* eslint-disable no-new */
