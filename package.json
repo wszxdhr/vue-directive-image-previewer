@@ -1,6 +1,6 @@
 {
   "name": "vue-directive-image-previewer",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "main": "dist/index.js",
   "files": [
     "dist",
@@ -15,7 +15,7 @@
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",
     "build": "node build/build.js",
-    "build:publish": "npm run build && npm publish",
+    "build:publish": "node build/publish.js",
     "lint": "eslint --ext .js,.vue src"
   },
   "dependencies": {

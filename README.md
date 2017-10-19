@@ -46,7 +46,7 @@ or
 
 ## Demo
 
-http://demo.anymelon.com/vue-directive-image-previewer
+http://demo.image-previewer.anymelon.com
 
 ## Api    (updated at 2017-09-15)
 
