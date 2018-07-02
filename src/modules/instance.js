@@ -1,11 +1,8 @@
 import Vue from 'vue'
-import ImagePreviewer from '../imagePreviewer.vue'
+import ImagePreviewer from '../imagePreviewer.js'
 
 function getInstance () {
-  return (new Vue({
-    el: document.createElement('div'),
-    render: (h) => h(ImagePreviewer)
-  })).$children[0]
+  return Vue.extend(ImagePreviewer)
 }
 
 export default getInstance

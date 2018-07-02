@@ -1,7 +1,16 @@
 <template>
   <div id="app">
-    <img class="example-pic" v-image-preview="pic" v-for="pic in pictures" :src="pic" alt=""/>
-    <img class="example-pic fixed" v-image-preview :src="fixedPicture" alt=""/>
+    <image-demo class="example-pic" v-image-preview="{
+      src: pic,
+      background: {
+        zIndex: 2,
+        backgroundColor: '#fff'
+      }
+    }" :key="idx" v-for="(pic, idx) in pictures" :src="pic" alt=""></image-demo>
+    <img ref="fixedPicture" class="example-pic fixed" v-image-preview="{
+      copy: false,
+      cursor: 'crosshair'
+    }" :src="fixedPicture" alt=""/>
     <!--<image-previewer></image-previewer>-->
   </div>
 </template>
@@ -9,6 +18,8 @@
 <script>
 import Hello from './components/Hello'
 import VueDirectiveImagePreviewer from '../dist'
+import ImageDemo from './components/Image'
+import bgComponent from './components/Mask'
 // import imagePreviewer from '../src/imagePreviewer.vue'
 export default {
   name: 'app',
@@ -20,14 +31,18 @@ export default {
         '../static/lion.jpg',
         '../static/squirrel.jpg'
       ],
-      fixedPicture: '../static/WTF.png'
+      fixedPicture: '../static/WTF.png',
+      bgComponent
     }
   },
   components: {
-    Hello// , imagePreviewer
+    Hello, // , imagePreviewer
+    ImageDemo
   },
   created () {
     console.log(VueDirectiveImagePreviewer)
+  },
+  mounted () {
   }
 }
 </script>

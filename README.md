@@ -48,16 +48,16 @@ or
 
 http://demo.image-previewer.anymelon.com
 
-## Api    (updated at 2017-09-15)
+## Api    (updated at 2018-07-02)
 
 ### options(in Vue.use())
 
 | API                          | TYPE          | EXAMPLE                                  | DEFAULT           | DESCRIBE                                 |
 | ---------------------------- | ------------- | ---------------------------------------- | ----------------- | ---------------------------------------- |
-| background                   | String / JSON | "#000000" or {color: "#000000"} or {image: "url(/someurl)"} | {color:"#000000"} | Background css of wrapper                |
+| background                   | String / JSON | "#000000" or {backgroundColor: "#000000"} | {backgroundColor:"#000000"} | Background css of wrapper                |
 | animate（not support yet）     | JSON          | {duration: 500, delay: 300, func: "linear"} | {duration: 500}   | Transition css of image(typeof field "duration" must be Number) |
 | loading（not support yet）     | JSON          | {pictureUrl: "http://somePicUrl"}        | undefined         | Settings of image when it is loading     |
-| cursor（not support yet）      | String        | (whatever of css cursor)                 | "pointer"         | Cursor css of image which has directive "v-image-preview" |
+| cursor      | String        | (whatever of css cursor)                 | "pointer"         | Cursor css of image which has directive "v-image-preview" |
 | clickMethod（not support yet） | String        | "click" / "doubleClick"                  | "click"           | Method of opening image, **not for closing** |
 
 ### options(in directive)
