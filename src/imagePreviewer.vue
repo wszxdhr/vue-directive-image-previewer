@@ -28,12 +28,15 @@
         default: () => ({})
       },
       sourceDom: {},
-      transitionDuration: {
-        default: 500
-      },
       cursor: {
         type: String,
         default: 'pointer'
+      },
+      animate: {
+        type: Object,
+        default: () => ({
+          duration: 500
+        })
       }
     },
     data () {
@@ -41,7 +44,8 @@
         isShow: false,
         pictureSize: {},
         imgStyle: {},
-        key: `image-previewer-${new Date().valueOf()}`
+        key: `image-previewer-${new Date().valueOf()}`,
+        status: '' // 'opening', 'opened', 'closing', 'closed'
       }
     },
     methods: {
@@ -53,7 +57,7 @@
         this.isShow = false
         setTimeout(() => {
           this.$emit('close')
-        }, this.transitionDuration)
+        }, this.animate.duration + this.animate.delay)
       },
       open () {
         this.isShow = true
@@ -86,13 +90,13 @@
     },
     computed: {
       bgStyle () {
-        console.log(this.background)
         let backgroundStyle = typeof this.background === 'string' ? {
           backgroundColor: this.background
         } : {
           backgroundColor: defaultBackgroundColor,
           ...this.background
         }
+        backgroundStyle.transition = `${this.animate.duration || 0}ms ${this.animate.delay || 0}ms`
         return {opacity: this.isShow ? '1' : '0', ...backgroundStyle}
       }
     },
@@ -103,7 +107,7 @@
           ['top', 'left', 'width', 'height'].forEach(key => {
             this.$set(this.imgStyle, key, val[key] + 'px')
           })
-          this.$set(this.imgStyle, 'transition', this.transitionDuration + 'ms')
+          this.$set(this.imgStyle, 'transition', `${this.animate.duration || 0}ms ${this.animate.delay || 0}ms`)
           this.$set(this.imgStyle, 'cursor', this.cursor)
         }
       },
@@ -137,7 +141,6 @@
       width: 100%;
       height: 100%;
       background-color: rgba(0, 0, 0, 0.5);
-      transition: .5s;
       opacity: 0;
     }
     &-body {

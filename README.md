@@ -22,21 +22,21 @@ Vue.use(VueDirectiveImagePreviewer, {
     duration: 600,
     delay: 500
   },
-  // loading
+  // loading (not supported)
   loading: {
     image: ''
   },
   // cursor(css)
   cursor: 'pointer',
-  clickMethod: 'doubleClick'   // click or doubleClick
+  clickMethod: 'doubleClick'   // click or doubleClick(not supported)
 })
 
 # use this directive
 <img v-image-preview src="some-pic-url"/>
 or 
-<img v-image-preview="some-pic-url" src="some-pic-url"/>
+<img v-image-preview="some-pic-url or another-pic-url" src="some-pic-url"/>
 or
-<img v-image-preview="{pictureUrl: 'some-pic-url'}" src="some-pic-url"/>
+<img v-image-preview="{src: 'some-pic-url or another-pic-url'}" src="some-pic-url"/>
 ```
 
 ## Github
@@ -48,14 +48,14 @@ or
 
 http://demo.image-previewer.anymelon.com
 
-## Api    (updated at 2018-07-02)
+## Api    (updated at 2018-07-04)
 
 ### options(in Vue.use())
 
 | API                          | TYPE          | EXAMPLE                                  | DEFAULT           | DESCRIBE                                 |
 | ---------------------------- | ------------- | ---------------------------------------- | ----------------- | ---------------------------------------- |
-| background                   | String / JSON | "#000000" or {backgroundColor: "#000000"} | {backgroundColor:"#000000"} | Background css of wrapper                |
-| animate（not support yet）     | JSON          | {duration: 500, delay: 300, func: "linear"} | {duration: 500}   | Transition css of image(typeof field "duration" must be Number) |
+| background                   | String / JSON | "#000000" or "rgba(0, 0, 0, 0.5)" or {backgroundColor: "#000000"} | {backgroundColor:"#000000"} | Background css of wrapper                |
+| animate     | JSON          | {duration: 500, delay: 300, func: "linear"} | {duration: 500}   | Transition css of image(field "duration" must be Number) |
 | loading（not support yet）     | JSON          | {pictureUrl: "http://somePicUrl"}        | undefined         | Settings of image when it is loading     |
 | cursor      | String        | (whatever of css cursor)                 | "pointer"         | Cursor css of image which has directive "v-image-preview" |
 | clickMethod（not support yet） | String        | "click" / "doubleClick"                  | "click"           | Method of opening image, **not for closing** |
@@ -65,7 +65,6 @@ http://demo.image-previewer.anymelon.com
 | API        | TYPE   | EXAMPLE               | DEFAULT      | DESCRIBE                                 |
 | ---------- | ------ | --------------------- | ------------ | ---------------------------------------- |
 | ALL        | String | "http://some-pic-url" | src of <img> | This is for only set in a String, like v-image-preview="some-pic-url". |
-| pictureUrl | String | "http://some-pic-url" | src of <img> | When you want to set other optioins of directive, use this. |
+| background                   | String / JSON | "#000000" or {backgroundColor: "#000000"} | {backgroundColor:"#000000"} | Background css of wrapper                |
+| src | String | "http://some-pic-url" | src of <img> | When you want to set another optioins of directive, use this. |
 
-
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

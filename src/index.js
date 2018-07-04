@@ -3,6 +3,7 @@
  */
 import Vue from 'vue'
 import imagePreviewer from './imagePreviewer.vue'
+import {merge} from 'lodash'
 const ImagePreviewer = Vue.extend(imagePreviewer)
 
 // import {getRect} from './modules/common.js'
@@ -11,12 +12,20 @@ const ImagePreviewer = Vue.extend(imagePreviewer)
 export default {
   install (Vue, options) {
     options = options || {}
+    options.copy = typeof options.copy === 'boolean' ? options.copy : true
     // init
     Vue.directive('image-preview', {
       bind (el, binding, vnode, oldVnode) {
         binding.value = binding.value || {}
-        let {src, background, copy, cursor} = binding.value
-        el.addEventListener('click', handleClick({vnode, src, background, copy, cursor}))
+        let {src, background, copy, cursor, animate} = binding.value
+        el.addEventListener('click', handleClick({
+          vnode,
+          src,
+          background: typeof background !== 'undefined' ? background : options.background,
+          copy: typeof copy === 'boolean' ? copy : options.copy,
+          cursor: cursor || options.cursor,
+          animate: merge(animate || {}, options.animate || {})
+        }))
       },
       update (el, binding, vnode) {
       }
@@ -34,7 +43,7 @@ const handleClose = (vm, sourceDom, copy) => {
   }
 }
 
-const handleClick = ({vnode, src: bindingSrc, background, copy = true, cursor = 'pointer'}) => {
+const handleClick = ({vnode, src: bindingSrc, background, copy = true, cursor = 'pointer', animate = {duration: 500}}) => {
   return (evt) => {
     let instance = new ImagePreviewer()
     let src = bindingSrc || vnode.data.attrs.src || vnode.componentInstance.src
@@ -42,6 +51,7 @@ const handleClick = ({vnode, src: bindingSrc, background, copy = true, cursor = 
     let {width, height, top, left} = rect
     instance.pictureSize = {width: width, height: height, top: top, left: left}
     instance.cursor = cursor
+    instance.animate = animate
     instance.vm = instance.$mount()
     instance.vm.src = [src]
     instance.vm.background = background

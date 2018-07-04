@@ -14,7 +14,7 @@ Vue.use(VueDirectiveImagePreviewer, {
   },
   // transition
   animate: {
-    duration: 600,
+    duration: 1000,
     delay: 500
   },
   // loading
