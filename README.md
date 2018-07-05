@@ -48,7 +48,7 @@ or
 
 http://demo.image-previewer.anymelon.com
 
-## Api    (updated at 2018-07-04)
+## Api    (updated at 2018-07-05)
 
 ### options(in Vue.use())(Global Settings)
 
@@ -60,6 +60,7 @@ http://demo.image-previewer.anymelon.com
 | cursor      | String         | (whatever of css cursor)   | "pointer"                   | Cursor css of image which has directive "v-image-preview" |
 | clickMethod（not support yet)| String        | "click" / "doubleClick"                  | "click"           | Method of opening image, **not for closing** |
 | copy                         | Boolean       | true / false                             | true              | if copy === true, when previewer is showing, the original picture will not disappear, on the contrary, it will disappear(by setting visibility: hidden;)|
+| zIndex                       | Number        | 1000                                     | 1                 | css 'z-index' of outermost wrapper       |
 
 ### options(in directive)(Setting only for Element itself)
 
@@ -71,4 +72,5 @@ http://demo.image-previewer.anymelon.com
 | cursor      | String        | (whatever of css cursor)                 | "pointer"         | Cursor css of image which has directive "v-image-preview" |
 | animate     | JSON          | {duration: 500, delay: 300, func: "linear"} | {duration: 500}   | Transition css of image(field "duration" must be Number) |
 | copy        | Boolean       | true / false                             | true              | if copy === true, when previewer is showing, the original picture will not disappear, on the contrary, it will disappear(by setting visibility: hidden;)|
+| zIndex                       | Number        | 1000                                     | 1                 | css 'z-index' of outermost wrapper       |
 

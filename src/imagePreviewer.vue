@@ -2,9 +2,12 @@
   <div ref="vue-directive-image-previewer"
        :disabled="!isShow"
        :key="key"
-       class="vue-directive-image-previewer">
+       class="vue-directive-image-previewer"
+       :style="{zIndex}">
+      <!--遮罩层-->
     <div class="vue-directive-image-previewer-background" :style="bgStyle" @click="close">
     </div>
+      <!--图片主体-->
     <div class="vue-directive-image-previewer-body" ref="body">
       <img ref="picture" class="vue-directive-image-previewer-img" :style="imgStyle" :src="src[0]" @click="close"/>
     </div>
@@ -16,22 +19,29 @@
   export default {
     name: 'vue-directive-image-previewer',
     props: {
+      // 整体wrap的z-index
+      zIndex: {
+        type: Number,
+        default: 1
+      },
+      // 图片url
       src: {
         type: Array,
         default: () => ([])
       },
+      // 背景mask样式，也可以是字符串，代表颜色
       background: {
         type: String || Object,
         default: defaultBackgroundColor
       },
-      pictureStyle: {
-        default: () => ({})
-      },
+      // 原始dom，也就是加上了指令的dom
       sourceDom: {},
+      // 光标css
       cursor: {
         type: String,
         default: 'pointer'
       },
+      // transition相关信息，包括delay，duration，func（timing function）
       animate: {
         type: Object,
         default: () => ({
@@ -42,7 +52,9 @@
     data () {
       return {
         isShow: false,
+        // 图片尺寸信息
         pictureSize: {},
+        // 图片样式
         imgStyle: {},
         key: `image-previewer-${new Date().valueOf()}`,
         status: '' // 'opening', 'opened', 'closing', 'closed'
@@ -63,9 +75,11 @@
         this.isShow = true
         this.setPictureSize()
       },
+      // 拼装transition信息
       handleTransition ({duration, delay, func}) {
         return `${duration || 0}ms ${delay || 0}ms ${func || ''}`
       },
+      // 设置展示完成时的状态
       setPictureSize () {
         let result = {}
         let picture = this.$refs.picture
@@ -85,6 +99,7 @@
         result.left = (window.innerWidth - parseInt(result.width)) / 2
         this.pictureSize = result
       },
+      // 设置开始和结束时的状态（也就是挂载指令的元素的size信息）
       setPictureBegin () {
         let rect = this.sourceDom.getBoundingClientRect()
         let {width, height, top, left} = rect

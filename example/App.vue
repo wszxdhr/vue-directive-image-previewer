@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <image-demo class="example-pic" v-image-preview="{
+      zIndex: 1000,
       src: pic,
       background: {
         zIndex: 2,

@@ -17,14 +17,15 @@ export default {
     Vue.directive('image-preview', {
       bind (el, binding, vnode, oldVnode) {
         binding.value = binding.value || {}
-        let {src, background, copy, cursor, animate} = binding.value
+        let {src, background, copy, cursor, animate, zIndex} = binding.value
         el.addEventListener('click', handleClick({
           vnode,
           src,
           background: merge(options.background || {}, background || {}),
           copy: typeof copy === 'boolean' ? copy : options.copy,
           cursor: cursor || options.cursor,
-          animate: merge(options.animate || {}, animate || {})
+          animate: merge(options.animate || {}, animate || {}),
+          zIndex: typeof zIndex === 'number' ? zIndex : options.zIndex
         }))
       },
       update (el, binding, vnode) {
@@ -43,7 +44,7 @@ const handleClose = (vm, sourceDom, copy) => {
   }
 }
 
-const handleClick = ({vnode, src: bindingSrc, background, copy = true, cursor = 'pointer', animate = {duration: 500}}) => {
+const handleClick = ({vnode, src: bindingSrc, background, copy = true, cursor = 'pointer', animate = {duration: 500}, zIndex}) => {
   return (evt) => {
     let instance = new ImagePreviewer()
     let src = bindingSrc || vnode.data.attrs.src || vnode.componentInstance.src
@@ -52,6 +53,7 @@ const handleClick = ({vnode, src: bindingSrc, background, copy = true, cursor = 
     instance.pictureSize = {width: width, height: height, top: top, left: left}
     instance.cursor = cursor
     instance.animate = animate
+    instance.zIndex = zIndex
     instance.vm = instance.$mount()
     instance.vm.src = [src]
     instance.vm.background = background
