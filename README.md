@@ -50,21 +50,25 @@ http://demo.image-previewer.anymelon.com
 
 ## Api    (updated at 2018-07-04)
 
-### options(in Vue.use())
+### options(in Vue.use())(Global Settings)
 
 | API                          | TYPE          | EXAMPLE                                  | DEFAULT           | DESCRIBE                                 |
 | ---------------------------- | ------------- | ---------------------------------------- | ----------------- | ---------------------------------------- |
 | background                   | String / JSON | "#000000" or "rgba(0, 0, 0, 0.5)" or {backgroundColor: "#000000"} | {backgroundColor:"#000000"} | Background css of wrapper                |
-| animate     | JSON          | {duration: 500, delay: 300, func: "linear"} | {duration: 500}   | Transition css of image(field "duration" must be Number) |
-| loading（not support yet）     | JSON          | {pictureUrl: "http://somePicUrl"}        | undefined         | Settings of image when it is loading     |
-| cursor      | String        | (whatever of css cursor)                 | "pointer"         | Cursor css of image which has directive "v-image-preview" |
-| clickMethod（not support yet） | String        | "click" / "doubleClick"                  | "click"           | Method of opening image, **not for closing** |
+| animate     | JSON           | {duration: 500, delay: 300, func: "linear"} | {duration: 500}   | Transition css of image(field "duration" must be Number) |
+| loading（not support yet）     | JSON        | {pictureUrl: "http://somePicUrl"}        | undefined         | Settings of image when it is loading     |
+| cursor      | String         | (whatever of css cursor)   | "pointer"                   | Cursor css of image which has directive "v-image-preview" |
+| clickMethod（not support yet)| String        | "click" / "doubleClick"                  | "click"           | Method of opening image, **not for closing** |
+| copy                         | Boolean       | true / false                             | true              | if copy === true, when previewer is showing, the original picture will not disappear, on the contrary, it will disappear(by setting visibility: hidden;)|
 
-### options(in directive)
+### options(in directive)(Setting only for Element itself)
 
 | API        | TYPE   | EXAMPLE               | DEFAULT      | DESCRIBE                                 |
 | ---------- | ------ | --------------------- | ------------ | ---------------------------------------- |
 | ALL        | String | "http://some-pic-url" | src of <img> | This is for only set in a String, like v-image-preview="some-pic-url". |
 | background                   | String / JSON | "#000000" or {backgroundColor: "#000000"} | {backgroundColor:"#000000"} | Background css of wrapper                |
 | src | String | "http://some-pic-url" | src of <img> | When you want to set another optioins of directive, use this. |
+| cursor      | String        | (whatever of css cursor)                 | "pointer"         | Cursor css of image which has directive "v-image-preview" |
+| animate     | JSON          | {duration: 500, delay: 300, func: "linear"} | {duration: 500}   | Transition css of image(field "duration" must be Number) |
+| copy        | Boolean       | true / false                             | true              | if copy === true, when previewer is showing, the original picture will not disappear, on the contrary, it will disappear(by setting visibility: hidden;)|
 

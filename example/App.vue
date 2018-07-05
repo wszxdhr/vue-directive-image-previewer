@@ -40,7 +40,6 @@ export default {
     ImageDemo
   },
   created () {
-    console.log(VueDirectiveImagePreviewer)
   },
   mounted () {
   }

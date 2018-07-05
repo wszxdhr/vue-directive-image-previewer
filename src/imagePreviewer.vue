@@ -63,6 +63,9 @@
         this.isShow = true
         this.setPictureSize()
       },
+      handleTransition ({duration, delay, func}) {
+        return `${duration || 0}ms ${delay || 0}ms ${func || ''}`
+      },
       setPictureSize () {
         let result = {}
         let picture = this.$refs.picture
@@ -96,7 +99,7 @@
           backgroundColor: defaultBackgroundColor,
           ...this.background
         }
-        backgroundStyle.transition = `${this.animate.duration || 0}ms ${this.animate.delay || 0}ms`
+        backgroundStyle.transition = this.handleTransition(this.animate)
         return {opacity: this.isShow ? '1' : '0', ...backgroundStyle}
       }
     },
@@ -107,7 +110,7 @@
           ['top', 'left', 'width', 'height'].forEach(key => {
             this.$set(this.imgStyle, key, val[key] + 'px')
           })
-          this.$set(this.imgStyle, 'transition', `${this.animate.duration || 0}ms ${this.animate.delay || 0}ms`)
+          this.$set(this.imgStyle, 'transition', this.handleTransition(this.animate))
           this.$set(this.imgStyle, 'cursor', this.cursor)
         }
       },

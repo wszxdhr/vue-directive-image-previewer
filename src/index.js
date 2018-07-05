@@ -21,10 +21,10 @@ export default {
         el.addEventListener('click', handleClick({
           vnode,
           src,
-          background: typeof background !== 'undefined' ? background : options.background,
+          background: merge(options.background || {}, background || {}),
           copy: typeof copy === 'boolean' ? copy : options.copy,
           cursor: cursor || options.cursor,
-          animate: merge(animate || {}, options.animate || {})
+          animate: merge(options.animate || {}, animate || {})
         }))
       },
       update (el, binding, vnode) {
