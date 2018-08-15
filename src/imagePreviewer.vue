@@ -91,7 +91,6 @@
       },
       // 设置展示完成时的状态
       setPictureSize () {
-        console.log('maxWidth', this.maxWidthComputed)
         let result = {}
         let picture = this.$refs.picture
         let pictureRatio = picture.naturalWidth / picture.naturalHeight

@@ -12,14 +12,12 @@ const ImagePreviewer = Vue.extend(imagePreviewer)
 export default {
   install (Vue, options) {
     options = options || {}
-    console.log(options)
     options.copy = typeof options.copy === 'boolean' ? options.copy : true
     // init
     Vue.directive('image-preview', {
       bind (el, binding, vnode, oldVnode) {
         binding.value = binding.value || {}
         let {src, background, copy, cursor, animate, zIndex, maxWidth, maxHeight, previewSize} = binding.value
-        console.log(typeof maxWidth !== undefined, typeof maxWidth !== undefined ? maxWidth : options.maxWidth)
         el.addEventListener('click', handleClick({
           vnode,
           src,
@@ -55,7 +53,6 @@ const handleClick = ({vnode, src: bindingSrc, background, copy = true, cursor = 
     let src = bindingSrc || vnode.data.attrs.src || vnode.componentInstance.src
     let rect = evt.target.getBoundingClientRect()
     let {width, height, top, left} = rect
-    console.log('maxWidth', maxWidth)
     instance.pictureSize = {width: width, height: height, top: top, left: left};
     (maxWidth !== undefined) && (instance.maxWidth = maxWidth);
     (maxHeight !== undefined) && (instance.maxHeight = maxHeight);
