@@ -12,6 +12,8 @@ Vue.use(VueDirectiveImagePreviewer, {
   background: {     // or : background: '#000'
     color: 'rgba(0, 0, 0, 0.9)' // or rgba or rgb     // or image: 'url(xxx)'
   },
+  maxWidth: '50%',
+  previewSize: 0.2,
   // transition
   animate: {
     duration: 1000,

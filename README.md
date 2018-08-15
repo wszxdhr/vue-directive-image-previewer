@@ -48,7 +48,7 @@ or
 
 http://demo.image-previewer.anymelon.com
 
-## Api    (updated at 2018-07-05)
+## Api    (updated at 2018-08-14)
 
 ### options(in Vue.use())(Global Settings)
 
@@ -61,6 +61,9 @@ http://demo.image-previewer.anymelon.com
 | clickMethod（not support yet)| String        | "click" / "doubleClick"                  | "click"           | Method of opening image, **not for closing** |
 | copy                         | Boolean       | true / false                             | true              | if copy === true, when previewer is showing, the original picture will not disappear, on the contrary, it will disappear(by setting visibility: hidden;)|
 | zIndex                       | Number        | 1000                                     | 1                 | css 'z-index' of outermost wrapper       |
+| maxWidth                     | Number || String | 1000  or '1000px' or '100%'           | undefined         | max width of previewer       |
+| maxHeight                    | Number || String | 1000  or '1000px' or '100%'           | undefined         | max height of previewer      |
+| previewSize                  | Number || String | 2 (previewer.width = image.width * 2, previewer.height = image.height * 2)  or '20%'                   | undefined         | how many times of the previewer with image       |
 
 ### options(in directive)(Setting only for Element itself)
 
@@ -73,4 +76,12 @@ http://demo.image-previewer.anymelon.com
 | animate     | JSON          | {duration: 500, delay: 300, func: "linear"} | {duration: 500}   | Transition css of image(field "duration" must be Number) |
 | copy        | Boolean       | true / false                             | true              | if copy === true, when previewer is showing, the original picture will not disappear, on the contrary, it will disappear(by setting visibility: hidden;)|
 | zIndex                       | Number        | 1000                                     | 1                 | css 'z-index' of outermost wrapper       |
+| maxWidth                     | Number || String | 1000  or '1000px' or '100%'           | undefined         | max width of previewer       |
+| maxHeight                    | Number || String | 1000  or '1000px' or '100%'           | undefined         | max height of previewer      |
+| previewSize                  | Number || String | 2 (previewer.width = image.width * 2, previewer.height = image.height * 2)  or '20%'                   | undefined         | how many times of the previewer with image       |
 
+## ChangeLog
+
+### 2018-8-14
+
+Add APIs: maxWidth, maxHeight, previewSize

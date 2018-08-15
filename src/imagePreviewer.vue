@@ -16,6 +16,7 @@
 
 <script>
   const defaultBackgroundColor = 'rgba(0, 0, 0, 0.5)'
+  const percent = 0.8
   export default {
     name: 'vue-directive-image-previewer',
     props: {
@@ -47,6 +48,15 @@
         default: () => ({
           duration: 500
         })
+      },
+      maxWidth: { // 预览图的最大宽度
+        type: [String, Number]
+      },
+      maxHeight: { // 预览图的最大高度
+        type: [String, Number]
+      },
+      previewSize: { // 预览图与原图的比例
+        type: [String, Number]
       }
     },
     data () {
@@ -81,17 +91,17 @@
       },
       // 设置展示完成时的状态
       setPictureSize () {
+        console.log('maxWidth', this.maxWidthComputed)
         let result = {}
         let picture = this.$refs.picture
         let pictureRatio = picture.naturalWidth / picture.naturalHeight
         let windowRatio = window.innerWidth / window.innerHeight
-        let percent = 0.8
         if (pictureRatio >= windowRatio) {
-          let width = window.innerWidth * percent
+          let width = this.maxWidthComputed
           result.width = parseInt(width)
           result.height = parseInt(width / pictureRatio)
         } else {
-          let height = window.innerHeight * percent
+          let height = this.maxHeightComputed
           result.height = parseInt(height)
           result.width = parseInt(height * pictureRatio)
         }
@@ -116,6 +126,32 @@
         }
         backgroundStyle.transition = this.handleTransition(this.animate)
         return {opacity: this.isShow ? '1' : '0', ...backgroundStyle}
+      },
+      maxWidthComputed () {
+        const windowWidth = window.innerWidth
+        let result = ''
+        switch (typeof this.maxWidth) {
+          case 'number': result = this.maxWidth; break
+          case 'string': result = (/\d+%$/).test(this.maxWidth) ? parseFloat(this.maxWidth) / 100 * windowWidth : parseFloat(this.maxWidth); break
+          default: result = windowWidth * percent
+        }
+        if (typeof this.previewSize !== 'undefined') {
+          result = Math.min(result, this.previewSize * this.pictureSize.width)
+        }
+        return result
+      },
+      maxHeightComputed () {
+        const windowHeight = window.innerHeight
+        let result = ''
+        switch (typeof this.maxHeight) {
+          case 'number': result = this.maxHeight; break
+          case 'string': result = (/\d+%$/).test(this.maxHeight) ? parseFloat(this.maxHeight) / 100 * windowHeight : parseFloat(this.maxHeight); break
+          default: result = windowHeight * percent
+        }
+        if (typeof this.previewSize !== 'undefined') {
+          result = Math.min(result, this.previewSize * this.pictureSize.height)
+        }
+        return result
       }
     },
     watch: {

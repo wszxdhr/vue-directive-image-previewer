@@ -7,18 +7,17 @@
         zIndex: 2,
         backgroundColor: '#fff'
       }
-    }" :key="idx" v-for="(pic, idx) in pictures" :src="pic" alt=""></image-demo>
+    }" v-if="showNormalImage" :key="idx" v-for="(pic, idx) in pictures" :src="pic" alt=""></image-demo>
     <img ref="fixedPicture" class="example-pic fixed" v-image-preview="{
       copy: false,
       cursor: 'crosshair'
-    }" :src="fixedPicture" alt=""/>
+    }" :src="fixedPicture" alt="" @click="showNormalImage = !showNormalImage"/>
     <!--<image-previewer></image-previewer>-->
   </div>
 </template>
 
 <script>
 import Hello from './components/Hello'
-import VueDirectiveImagePreviewer from '../dist'
 import ImageDemo from './components/Image'
 import bgComponent from './components/Mask'
 // import imagePreviewer from '../src/imagePreviewer.vue'
@@ -33,7 +32,8 @@ export default {
         '../static/squirrel.jpg'
       ],
       fixedPicture: '../static/WTF.png',
-      bgComponent
+      bgComponent,
+      showNormalImage: true
     }
   },
   components: {
