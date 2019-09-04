@@ -14,25 +14,26 @@ export default {
     options = options || {}
     options.copy = typeof options.copy === 'boolean' ? options.copy : true
     // init
-    Vue.directive('image-preview', {
-      bind (el, binding, vnode, oldVnode) {
-        binding.value = binding.value || {}
-        let {src, background, copy, cursor, animate, zIndex, maxWidth, maxHeight, previewSize} = binding.value
-        el.addEventListener('click', handleClick({
-          vnode,
-          src,
-          background: merge(options.background || {}, background || {}),
-          copy: typeof copy === 'boolean' ? copy : options.copy,
-          cursor: cursor || options.cursor,
-          animate: merge(options.animate || {}, animate || {}),
-          zIndex: typeof zIndex === 'number' ? zIndex : options.zIndex,
-          maxWidth: maxWidth !== undefined ? maxWidth : options.maxWidth,
-          maxHeight: maxHeight !== undefined ? maxHeight : options.maxHeight,
-          previewSize: previewSize !== undefined ? previewSize : options.previewSize
-        }))
-      },
-      update (el, binding, vnode) {
+    Vue.directive('image-preview', function(el, binding, vnode) {
+      binding.value = binding.value || {}
+      let {src, background, copy, cursor, animate, zIndex, maxWidth, maxHeight, previewSize} = binding.value
+      // 移除旧的事件绑定
+      if (el._clickHander) {
+        el.removeEventListener('click', el._clickHander);
       }
+      el._clickHander = handleClick({
+        vnode,
+        src,
+        background: merge(options.background || {}, background || {}),
+        copy: typeof copy === 'boolean' ? copy : options.copy,
+        cursor: cursor || options.cursor,
+        animate: merge(options.animate || {}, animate || {}),
+        zIndex: typeof zIndex === 'number' ? zIndex : options.zIndex,
+        maxWidth: maxWidth !== undefined ? maxWidth : options.maxWidth,
+        maxHeight: maxHeight !== undefined ? maxHeight : options.maxHeight,
+        previewSize: previewSize !== undefined ? previewSize : options.previewSize
+      })
+      el.addEventListener('click', el._clickHander)
     })
   }
 }
