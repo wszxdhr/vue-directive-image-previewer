@@ -18,10 +18,10 @@ export default {
       binding.value = binding.value || {}
       let {src, background, copy, cursor, animate, zIndex, maxWidth, maxHeight, previewSize} = binding.value
       // 移除旧的事件绑定
-      if (el._clickHander) {
-        el.removeEventListener('click', el._clickHander);
+      if (el._clickHandler) {
+        el.removeEventListener('click', el._clickHandler);
       }
-      el._clickHander = handleClick({
+      el._clickHandler = handleClick({
         vnode,
         src,
         background: merge(options.background || {}, background || {}),
@@ -33,7 +33,7 @@ export default {
         maxHeight: maxHeight !== undefined ? maxHeight : options.maxHeight,
         previewSize: previewSize !== undefined ? previewSize : options.previewSize
       })
-      el.addEventListener('click', el._clickHander)
+      el.addEventListener('click', el._clickHandler)
     })
   }
 }
