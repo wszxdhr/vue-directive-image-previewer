@@ -14,12 +14,12 @@ export default {
     options = options || {}
     options.copy = typeof options.copy === 'boolean' ? options.copy : true
     // init
-    Vue.directive('image-preview', function(el, binding, vnode) {
+    Vue.directive('image-preview', function (el, binding, vnode) {
       binding.value = binding.value || {}
       let {src, background, copy, cursor, animate, zIndex, maxWidth, maxHeight, previewSize} = binding.value
       // 移除旧的事件绑定
       if (el._clickHandler) {
-        el.removeEventListener('click', el._clickHandler);
+        el.removeEventListener('click', el._clickHandler)
       }
       el._clickHandler = handleClick({
         vnode,
